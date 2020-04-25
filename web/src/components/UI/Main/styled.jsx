@@ -8,12 +8,13 @@ export const Container = styled.main`
   font-weight: 600;
 `;
 
-export const Catalog = styled.div`
+export const Catalog = styled.ul`
   display: flex;
   flex-wrap: wrap;
+  list-style: none;
 `;
 
-export const Product = styled.div`
+export const Product = styled.li`
   width: 300px;
   margin: 10px 5px;
   margin-left: 0;
@@ -21,7 +22,14 @@ export const Product = styled.div`
   font-family: 'Roboto', sans-serif;
 `;
 
-export const ProductPhoto = styled.figure``;
+export const ProductPhoto = styled.figure`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 383px;
+  background-color: #fff;
+`;
 
 export const Photo = styled.img`
   width: 100%;
@@ -39,4 +47,14 @@ export const ProductName = styled.h2`
 export const ProductValue = styled.span`
   font-weight: 400;
   color: rgba(0, 0, 0, 0.9);
+`;
+
+export const ProductDiscount = styled.span`
+  position: absolute;
+  background-color: black;
+  color: #fff;
+  top: -0px;
+  right: -0px;
+  padding: 2px;
+  font-weight: 400;
 `;

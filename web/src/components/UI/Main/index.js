@@ -8,6 +8,7 @@ import {
   Photo,
   ProductName,
   ProductValue,
+  ProductDiscount,
 } from './styled';
 
 const Main = () => {
@@ -29,7 +30,14 @@ const Main = () => {
         {products.map((product, index) => (
           <Product key={product.name + '_' + index}>
             <ProductPhoto>
-              <Photo src={product.image} />
+              {product.discount_percentage && (
+                <ProductDiscount>{product.discount_percentage}</ProductDiscount>
+              )}
+              {product.image ? (
+                <Photo src={product.image} />
+              ) : (
+                'Imagem indisponivel'
+              )}
             </ProductPhoto>
             <ProductName>{product.name}</ProductName>
             <ProductValue>{product.actual_price}</ProductValue>

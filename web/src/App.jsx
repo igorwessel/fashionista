@@ -1,14 +1,8 @@
-import React, { Fragment } from 'react';
-import Header from 'components/UI/Header';
-import Main from 'components/UI/Main';
+import React from 'react';
+import Routes from 'routes';
 
 const App = () => {
-  return (
-    <Fragment>
-      <Header />
-      <Main />
-    </Fragment>
-  );
+  return <Routes />;
 };
 
 export default App;
