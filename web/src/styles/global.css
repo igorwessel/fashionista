@@ -19,3 +19,12 @@ button {
   outline: 0;
   border: 0;
 }
+
+a,
+a:hover,
+a:focus,
+a:active {
+  color: black;
+  outline: 0;
+  text-decoration: none;
+}

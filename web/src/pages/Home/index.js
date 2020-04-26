@@ -13,7 +13,6 @@ import {
   ProductOldValue,
 } from './styled';
 import Header from 'components/UI/Header';
-import { MdNoEncryption } from 'react-icons/md';
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -39,7 +38,7 @@ const Home = () => {
                 to={`/produto/${product.name
                   .toLowerCase()
                   .replace(/\s+/gm, '-')}`}
-                style={{ textDecoration: 'none', color: '#aaa' }}
+                style={{ color: '#aaa' }}
               >
                 <ProductPhoto>
                   {product.discount_percentage && (

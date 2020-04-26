@@ -18,10 +18,6 @@ export const Container = styled.header`
     width: calc(100% - 10px);
     padding: 0 5px;
   }
-
-  @media ${device.tablet} and (max-width: ${size.desktop}) {
-    width: calc(100% - 60px);
-  }
 `;
 
 export const Title = styled.h1`
