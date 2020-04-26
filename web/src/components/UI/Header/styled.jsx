@@ -1,11 +1,27 @@
 import styled from 'styled-components';
+import { device, size } from 'styles/media';
 
 export const Container = styled.header`
   display: flex;
   justify-content: space-between;
+  width: calc(100% - 60px);
+  position: fixed;
+  top: 0;
+  left: 0;
   padding: 0 50px;
+  z-index: 2;
   align-items: center;
+  box-shadow: -1px 0 5px rgba(0, 0, 0, 0.2);
   background-color: #fff;
+
+  @media ${device.mobileS} and (max-width: ${size.mobileL}) {
+    width: calc(100% - 10px);
+    padding: 0 5px;
+  }
+
+  @media ${device.tablet} and (max-width: ${size.desktop}) {
+    width: calc(100% - 60px);
+  }
 `;
 
 export const Title = styled.h1`
@@ -20,6 +36,8 @@ export const ButtonWithIcon = styled.button`
   margin: 0 5px;
   cursor: pointer;
 `;
+
+export const ActionsContainer = styled.div``;
 
 export const BagItem = styled.div`
   display: flex;
