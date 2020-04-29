@@ -17,99 +17,102 @@ import {
   Installments,
   Photo,
 } from './styled';
+import Sidebar from 'components/UI/Sidebar';
 
-const SearchPanel = ({ open }) => {
+const SearchPanel = ({ open, isOpen }) => {
   return (
-    <PanelContainer>
-      <SearchContainer>
-        <SearchDetails>
-          <MdArrowBack
-            size={24}
-            onClick={() => open(false)}
-            style={{ cursor: 'pointer' }}
-          />
-          <SearchTitle>Buscar Produtos</SearchTitle>
-        </SearchDetails>
-        <InputContainer>
-          <SearchInput type="text" placeholder="Digite aqui" />
-        </InputContainer>
-      </SearchContainer>
-      <ProductContainer>
-        4 items
-        <ProductList>
-          <ProductItem>
-            <ProductImage>
-              <Photo src="https://d3l7rqep7l31az.cloudfront.net/images/products/20001786_594_catalog_1.jpg?1449159646" />
-            </ProductImage>
-            <ProductName>CALÇA COMFORT TASSEL</ProductName>
-            <ProductPrice>
-              <Price>R$ 139,90</Price>
-              <Installments>2x R$ 42,45</Installments>
-            </ProductPrice>
-          </ProductItem>
-          <ProductItem>
-            <ProductImage>
-              <Photo src="https://d3l7rqep7l31az.cloudfront.net/images/products/20001786_594_catalog_1.jpg?1449159646" />
-            </ProductImage>
-            <ProductName>CALÇA COMFORT TASSEL</ProductName>
-            <ProductPrice>
-              <Price>R$ 139,90</Price>
-              <Installments>2x R$ 42,45</Installments>
-            </ProductPrice>
-          </ProductItem>
-          <ProductItem>
-            <ProductImage>
-              <Photo src="https://d3l7rqep7l31az.cloudfront.net/images/products/20001786_594_catalog_1.jpg?1449159646" />
-            </ProductImage>
-            <ProductName>CALÇA COMFORT TASSEL</ProductName>
-            <ProductPrice>
-              <Price>R$ 139,90</Price>
-              <Installments>2x R$ 42,45</Installments>
-            </ProductPrice>
-          </ProductItem>
-          <ProductItem>
-            <ProductImage>
-              <Photo src="https://d3l7rqep7l31az.cloudfront.net/images/products/20001786_594_catalog_1.jpg?1449159646" />
-            </ProductImage>
-            <ProductName>CALÇA COMFORT TASSEL</ProductName>
-            <ProductPrice>
-              <Price>R$ 139,90</Price>
-              <Installments>2x R$ 42,45</Installments>
-            </ProductPrice>
-          </ProductItem>
-          <ProductItem>
-            <ProductImage>
-              <Photo src="https://d3l7rqep7l31az.cloudfront.net/images/products/20001786_594_catalog_1.jpg?1449159646" />
-            </ProductImage>
-            <ProductName>CALÇA COMFORT TASSEL</ProductName>
-            <ProductPrice>
-              <Price>R$ 139,90</Price>
-              <Installments>2x R$ 42,45</Installments>
-            </ProductPrice>
-          </ProductItem>
-          <ProductItem>
-            <ProductImage>
-              <Photo src="https://d3l7rqep7l31az.cloudfront.net/images/products/20001786_594_catalog_1.jpg?1449159646" />
-            </ProductImage>
-            <ProductName>CALÇA COMFORT TASSEL</ProductName>
-            <ProductPrice>
-              <Price>R$ 139,90</Price>
-              <Installments>2x R$ 42,45</Installments>
-            </ProductPrice>
-          </ProductItem>
-          <ProductItem>
-            <ProductImage>
-              <Photo src="https://d3l7rqep7l31az.cloudfront.net/images/products/20001786_594_catalog_1.jpg?1449159646" />
-            </ProductImage>
-            <ProductName>CALÇA COMFORT TASSEL</ProductName>
-            <ProductPrice>
-              <Price>R$ 139,90</Price>
-              <Installments>2x R$ 42,45</Installments>
-            </ProductPrice>
-          </ProductItem>
-        </ProductList>
-      </ProductContainer>
-    </PanelContainer>
+    <Sidebar isOpen={isOpen}>
+      <PanelContainer>
+        <SearchContainer>
+          <SearchDetails>
+            <MdArrowBack
+              size={24}
+              onClick={() => open(false)}
+              style={{ cursor: 'pointer' }}
+            />
+            <SearchTitle>Buscar Produtos</SearchTitle>
+          </SearchDetails>
+          <InputContainer>
+            <SearchInput type="text" placeholder="Digite aqui" />
+          </InputContainer>
+        </SearchContainer>
+        <ProductContainer>
+          4 items
+          <ProductList>
+            <ProductItem>
+              <ProductImage>
+                <Photo src="https://d3l7rqep7l31az.cloudfront.net/images/products/20001786_594_catalog_1.jpg?1449159646" />
+              </ProductImage>
+              <ProductName>CALÇA COMFORT TASSEL</ProductName>
+              <ProductPrice>
+                <Price>R$ 139,90</Price>
+                <Installments>2x R$ 42,45</Installments>
+              </ProductPrice>
+            </ProductItem>
+            <ProductItem>
+              <ProductImage>
+                <Photo src="https://d3l7rqep7l31az.cloudfront.net/images/products/20001786_594_catalog_1.jpg?1449159646" />
+              </ProductImage>
+              <ProductName>CALÇA COMFORT TASSEL</ProductName>
+              <ProductPrice>
+                <Price>R$ 139,90</Price>
+                <Installments>2x R$ 42,45</Installments>
+              </ProductPrice>
+            </ProductItem>
+            <ProductItem>
+              <ProductImage>
+                <Photo src="https://d3l7rqep7l31az.cloudfront.net/images/products/20001786_594_catalog_1.jpg?1449159646" />
+              </ProductImage>
+              <ProductName>CALÇA COMFORT TASSEL</ProductName>
+              <ProductPrice>
+                <Price>R$ 139,90</Price>
+                <Installments>2x R$ 42,45</Installments>
+              </ProductPrice>
+            </ProductItem>
+            <ProductItem>
+              <ProductImage>
+                <Photo src="https://d3l7rqep7l31az.cloudfront.net/images/products/20001786_594_catalog_1.jpg?1449159646" />
+              </ProductImage>
+              <ProductName>CALÇA COMFORT TASSEL</ProductName>
+              <ProductPrice>
+                <Price>R$ 139,90</Price>
+                <Installments>2x R$ 42,45</Installments>
+              </ProductPrice>
+            </ProductItem>
+            <ProductItem>
+              <ProductImage>
+                <Photo src="https://d3l7rqep7l31az.cloudfront.net/images/products/20001786_594_catalog_1.jpg?1449159646" />
+              </ProductImage>
+              <ProductName>CALÇA COMFORT TASSEL</ProductName>
+              <ProductPrice>
+                <Price>R$ 139,90</Price>
+                <Installments>2x R$ 42,45</Installments>
+              </ProductPrice>
+            </ProductItem>
+            <ProductItem>
+              <ProductImage>
+                <Photo src="https://d3l7rqep7l31az.cloudfront.net/images/products/20001786_594_catalog_1.jpg?1449159646" />
+              </ProductImage>
+              <ProductName>CALÇA COMFORT TASSEL</ProductName>
+              <ProductPrice>
+                <Price>R$ 139,90</Price>
+                <Installments>2x R$ 42,45</Installments>
+              </ProductPrice>
+            </ProductItem>
+            <ProductItem>
+              <ProductImage>
+                <Photo src="https://d3l7rqep7l31az.cloudfront.net/images/products/20001786_594_catalog_1.jpg?1449159646" />
+              </ProductImage>
+              <ProductName>CALÇA COMFORT TASSEL</ProductName>
+              <ProductPrice>
+                <Price>R$ 139,90</Price>
+                <Installments>2x R$ 42,45</Installments>
+              </ProductPrice>
+            </ProductItem>
+          </ProductList>
+        </ProductContainer>
+      </PanelContainer>
+    </Sidebar>
   );
 };
 

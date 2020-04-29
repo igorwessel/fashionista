@@ -4,7 +4,7 @@ import { device } from 'styles/media';
 export const Container = styled.main`
   display: flex;
   flex-direction: column;
-  margin: 25px 0;
+  margin: 50px 0;
   padding: 20px 25px;
   color: #aaa;
   font-weight: 600;

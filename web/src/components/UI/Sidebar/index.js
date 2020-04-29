@@ -1,9 +1,9 @@
 import React from 'react';
 import { BGDark, Container } from './styled';
 
-const Sidebar = ({ children, open }) => {
+const Sidebar = ({ children, isOpen }) => {
   return (
-    <BGDark style={{ display: open ? 'block' : 'none' }}>
+    <BGDark style={{ display: isOpen ? 'block' : 'none' }}>
       <Container>{children}</Container>
     </BGDark>
   );

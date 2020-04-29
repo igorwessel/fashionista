@@ -9,8 +9,8 @@ import {
   BagItem,
   ActionsContainer,
 } from './styled';
-import Sidebar from '../Sidebar';
 import SearchPanel from 'components/SearchPanel';
+import CartPanel from 'components/CartPanel';
 
 const Header = () => {
   const [openSearch, setOpenSearch] = useState(false);
@@ -21,11 +21,8 @@ const Header = () => {
       <Link to="/">
         <Title>Fashionista</Title>
       </Link>
-      {openSearch && (
-        <Sidebar open={openSearch}>
-          <SearchPanel open={setOpenSearch} />
-        </Sidebar>
-      )}
+      {openSearch && <SearchPanel isOpen={openSearch} open={setOpenSearch} />}
+      {openCart && <CartPanel isOpen={openCart} open={setOpenCart} />}
       <ActionsContainer>
         <ButtonWithIcon>
           <MdSearch
@@ -35,7 +32,11 @@ const Header = () => {
           />
         </ButtonWithIcon>
         <ButtonWithIcon>
-          <FiShoppingBag size={24} color="black" />
+          <FiShoppingBag
+            size={24}
+            color="black"
+            onClick={() => setOpenCart(true)}
+          />
           <BagItem>1</BagItem>
         </ButtonWithIcon>
       </ActionsContainer>
