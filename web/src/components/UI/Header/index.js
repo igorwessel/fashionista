@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { openCartPanel, openSearchPanel } from 'reducers/ui/action-creators';
 import { MdSearch } from 'react-icons/md';
 import { FiShoppingBag } from 'react-icons/fi';
 import {
@@ -12,36 +14,34 @@ import {
 import SearchPanel from 'components/SearchPanel';
 import CartPanel from 'components/CartPanel';
 
-const Header = () => {
-  const [openSearch, setOpenSearch] = useState(false);
-  const [openCart, setOpenCart] = useState(false);
-
+const Header = ({ ui: { cartPanel, searchPanel }, openCart, openSearch }) => {
   return (
     <Container>
+      {cartPanel && <CartPanel />}
+      {searchPanel && <SearchPanel />}
       <Link to="/">
         <Title>Fashionista</Title>
       </Link>
-      {openSearch && <SearchPanel isOpen={openSearch} open={setOpenSearch} />}
-      {openCart && <CartPanel isOpen={openCart} open={setOpenCart} />}
       <ActionsContainer>
         <ButtonWithIcon>
-          <MdSearch
-            size={24}
-            color="black"
-            onClick={(e) => setOpenSearch(true)}
-          />
+          <MdSearch size={24} color="black" onClick={openSearch} />
         </ButtonWithIcon>
         <ButtonWithIcon>
-          <FiShoppingBag
-            size={24}
-            color="black"
-            onClick={() => setOpenCart(true)}
-          />
-          <BagItem>1</BagItem>
+          <FiShoppingBag size={24} color="black" onClick={openCart} />
+          <BagItem onClick={openCart}>1</BagItem>
         </ButtonWithIcon>
       </ActionsContainer>
     </Container>
   );
 };
 
-export default Header;
+const mapDispatchToProps = (dispatch) => ({
+  openCart: () => dispatch(openCartPanel()),
+  openSearch: () => dispatch(openSearchPanel()),
+});
+
+const mapStateToProps = (state) => ({
+  ui: state.ui,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

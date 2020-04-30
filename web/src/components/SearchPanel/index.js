@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { MdArrowBack } from 'react-icons/md';
 import {
   PanelContainer,
@@ -19,15 +20,17 @@ import {
 } from './styled';
 import Sidebar from 'components/UI/Sidebar';
 
-const SearchPanel = ({ open, isOpen }) => {
+import { closeSearchPanel } from 'reducers/ui/action-creators';
+
+const SearchPanel = ({ closeSearch }) => {
   return (
-    <Sidebar isOpen={isOpen}>
+    <Sidebar>
       <PanelContainer>
         <SearchContainer>
           <SearchDetails>
             <MdArrowBack
               size={24}
-              onClick={() => open(false)}
+              onClick={closeSearch}
               style={{ cursor: 'pointer' }}
             />
             <SearchTitle>Buscar Produtos</SearchTitle>
@@ -116,4 +119,8 @@ const SearchPanel = ({ open, isOpen }) => {
   );
 };
 
-export default SearchPanel;
+const mapDispatchToProps = (dispatch) => ({
+  closeSearch: () => dispatch(closeSearchPanel()),
+});
+
+export default connect(null, mapDispatchToProps)(SearchPanel);

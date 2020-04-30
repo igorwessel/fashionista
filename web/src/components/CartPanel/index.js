@@ -1,5 +1,8 @@
 import React from 'react';
 import { MdArrowBack } from 'react-icons/md';
+import { connect } from 'react-redux';
+import { closeCartPanel } from 'reducers/ui/action-creators';
+
 import Sidebar from 'components/UI/Sidebar';
 import {
   CartContainer,
@@ -22,14 +25,14 @@ import {
   Text,
 } from './styled';
 
-const CartPanel = ({ isOpen, open }) => {
+const CartPanel = ({ closeCart }) => {
   return (
-    <Sidebar isOpen={isOpen}>
+    <Sidebar>
       <CartContainer>
         <CartHeader>
           <MdArrowBack
             size={24}
-            onClick={() => open(false)}
+            onClick={closeCart}
             style={{ cursor: 'pointer' }}
           />
           <CartTitle>Sacola (1)</CartTitle>
@@ -64,4 +67,8 @@ const CartPanel = ({ isOpen, open }) => {
   );
 };
 
-export default CartPanel;
+const mapDispatchToProps = (dispatch) => ({
+  closeCart: () => dispatch(closeCartPanel()),
+});
+
+export default connect(null, mapDispatchToProps)(CartPanel);

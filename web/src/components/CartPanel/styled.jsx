@@ -6,7 +6,8 @@ export const CartContainer = styled.aside`
   flex-direction: column;
   background-color: #fff;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  width: 400px;
+  width: 100%;
+  max-width: 420px;
   height: 100vh;
 `;
 

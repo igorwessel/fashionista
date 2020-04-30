@@ -1,12 +1,17 @@
 import React from 'react';
 import { BGDark, Container } from './styled';
+import { connect } from 'react-redux';
 
-const Sidebar = ({ children, isOpen }) => {
+const Sidebar = ({ children, ui: { cartPanel, searchPanel } }) => {
   return (
-    <BGDark style={{ display: isOpen ? 'block' : 'none' }}>
+    <BGDark style={{ display: cartPanel || searchPanel ? 'flex' : '' }}>
       <Container>{children}</Container>
     </BGDark>
   );
 };
 
-export default Sidebar;
+const mapStateToProps = (state) => ({
+  ui: state.ui,
+});
+
+export default connect(mapStateToProps)(Sidebar);

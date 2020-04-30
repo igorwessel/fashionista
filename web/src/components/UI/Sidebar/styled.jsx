@@ -20,7 +20,11 @@ export const BGDark = styled.div`
 
 export const Container = styled.div`
   position: absolute;
-  right: -0px;
+  right: -0;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 412px) {
+    width: 100%;
+  }
 `;
