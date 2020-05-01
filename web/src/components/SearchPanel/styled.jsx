@@ -7,7 +7,7 @@ export const PanelContainer = styled.aside`
   background-color: #fff;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   width: 100%;
-  max-width: 420px;
+  height: 100%;
 `;
 
 export const SearchContainer = styled.div`
@@ -28,8 +28,6 @@ export const SearchTitle = styled.h4`
 `;
 
 export const InputContainer = styled.div`
-  position: sticky;
-  top: 0;
   display: flex;
   justify-content: center;
   background-color: #f2f2f2;
@@ -47,48 +45,7 @@ export const SearchInput = styled.input`
 `;
 
 export const ProductContainer = styled.div`
-  height: 100%;
   background-color: #f9f9f9;
   color: #969696;
   padding: 5px 10px;
-`;
-
-export const ProductList = styled.ul`
-  list-style: none;
-`;
-
-export const ProductItem = styled.li`
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.89em;
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-`;
-
-export const ProductImage = styled.figure``;
-
-export const ProductName = styled.span`
-  color: black;
-  font-weight: 600;
-`;
-
-export const ProductPrice = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-export const Price = styled.span`
-  font-weight: 600;
-  color: black;
-  font-size: 1rem;
-`;
-
-export const Installments = styled.span`
-  margin: 8px 0;
-  font-size: 0.94em;
-`;
-
-export const Photo = styled.img`
-  width: 100%;
-  max-width: 100px;
 `;

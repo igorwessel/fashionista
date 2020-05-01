@@ -23,7 +23,8 @@ export const Container = styled.div`
   right: -0;
   display: flex;
   flex-direction: column;
-
+  width: 420px;
+  height: 100vh;
   @media (max-width: 412px) {
     width: 100%;
   }

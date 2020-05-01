@@ -1,126 +1,57 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { MdArrowBack } from 'react-icons/md';
 import {
   PanelContainer,
   InputContainer,
-  ProductContainer,
   SearchContainer,
   SearchInput,
   SearchDetails,
   SearchTitle,
-  ProductList,
-  ProductItem,
-  ProductImage,
-  ProductName,
-  ProductPrice,
-  Price,
-  Installments,
-  Photo,
+  ProductContainer,
 } from './styled';
 import Sidebar from 'components/UI/Sidebar';
 
 import { closeSearchPanel } from 'reducers/ui/action-creators';
+import ProductFilteredList from 'components/ProductFilteredList';
+import { filterByName } from 'reducers/inventory/action-creators';
 
-const SearchPanel = ({ closeSearch }) => {
+const SearchPanel = ({ closeSearch, filtered, filterByName }) => {
+  const [query, setQuery] = useState();
+  const filter = useMemo(() => filterByName(query), [query, filterByName]);
+
   return (
     <Sidebar>
       <PanelContainer>
         <SearchContainer>
           <SearchDetails>
-            <MdArrowBack
-              size={24}
-              onClick={closeSearch}
-              style={{ cursor: 'pointer' }}
-            />
+            <MdArrowBack size={24} onClick={closeSearch} style={{ cursor: 'pointer' }} />
             <SearchTitle>Buscar Produtos</SearchTitle>
           </SearchDetails>
           <InputContainer>
-            <SearchInput type="text" placeholder="Digite aqui" />
+            <SearchInput
+              type="text"
+              placeholder="Digite aqui"
+              onChange={(e) => setQuery(e.target.value)}
+            />
           </InputContainer>
         </SearchContainer>
         <ProductContainer>
-          4 items
-          <ProductList>
-            <ProductItem>
-              <ProductImage>
-                <Photo src="https://d3l7rqep7l31az.cloudfront.net/images/products/20001786_594_catalog_1.jpg?1449159646" />
-              </ProductImage>
-              <ProductName>CALÇA COMFORT TASSEL</ProductName>
-              <ProductPrice>
-                <Price>R$ 139,90</Price>
-                <Installments>2x R$ 42,45</Installments>
-              </ProductPrice>
-            </ProductItem>
-            <ProductItem>
-              <ProductImage>
-                <Photo src="https://d3l7rqep7l31az.cloudfront.net/images/products/20001786_594_catalog_1.jpg?1449159646" />
-              </ProductImage>
-              <ProductName>CALÇA COMFORT TASSEL</ProductName>
-              <ProductPrice>
-                <Price>R$ 139,90</Price>
-                <Installments>2x R$ 42,45</Installments>
-              </ProductPrice>
-            </ProductItem>
-            <ProductItem>
-              <ProductImage>
-                <Photo src="https://d3l7rqep7l31az.cloudfront.net/images/products/20001786_594_catalog_1.jpg?1449159646" />
-              </ProductImage>
-              <ProductName>CALÇA COMFORT TASSEL</ProductName>
-              <ProductPrice>
-                <Price>R$ 139,90</Price>
-                <Installments>2x R$ 42,45</Installments>
-              </ProductPrice>
-            </ProductItem>
-            <ProductItem>
-              <ProductImage>
-                <Photo src="https://d3l7rqep7l31az.cloudfront.net/images/products/20001786_594_catalog_1.jpg?1449159646" />
-              </ProductImage>
-              <ProductName>CALÇA COMFORT TASSEL</ProductName>
-              <ProductPrice>
-                <Price>R$ 139,90</Price>
-                <Installments>2x R$ 42,45</Installments>
-              </ProductPrice>
-            </ProductItem>
-            <ProductItem>
-              <ProductImage>
-                <Photo src="https://d3l7rqep7l31az.cloudfront.net/images/products/20001786_594_catalog_1.jpg?1449159646" />
-              </ProductImage>
-              <ProductName>CALÇA COMFORT TASSEL</ProductName>
-              <ProductPrice>
-                <Price>R$ 139,90</Price>
-                <Installments>2x R$ 42,45</Installments>
-              </ProductPrice>
-            </ProductItem>
-            <ProductItem>
-              <ProductImage>
-                <Photo src="https://d3l7rqep7l31az.cloudfront.net/images/products/20001786_594_catalog_1.jpg?1449159646" />
-              </ProductImage>
-              <ProductName>CALÇA COMFORT TASSEL</ProductName>
-              <ProductPrice>
-                <Price>R$ 139,90</Price>
-                <Installments>2x R$ 42,45</Installments>
-              </ProductPrice>
-            </ProductItem>
-            <ProductItem>
-              <ProductImage>
-                <Photo src="https://d3l7rqep7l31az.cloudfront.net/images/products/20001786_594_catalog_1.jpg?1449159646" />
-              </ProductImage>
-              <ProductName>CALÇA COMFORT TASSEL</ProductName>
-              <ProductPrice>
-                <Price>R$ 139,90</Price>
-                <Installments>2x R$ 42,45</Installments>
-              </ProductPrice>
-            </ProductItem>
-          </ProductList>
+          {filtered.length} items
+          <ProductFilteredList />
         </ProductContainer>
       </PanelContainer>
     </Sidebar>
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  closeSearch: () => dispatch(closeSearchPanel()),
+const mapStateToProps = (state) => ({
+  filtered: state.inventory.filtered,
 });
 
-export default connect(null, mapDispatchToProps)(SearchPanel);
+const mapDispatchToProps = (dispatch) => ({
+  closeSearch: () => dispatch(closeSearchPanel()),
+  filterByName: (name) => dispatch(filterByName(name)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchPanel);

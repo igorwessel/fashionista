@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useCallback } from 'react';
 import Header from 'components/UI/Header';
 import {
   Product,
@@ -23,9 +23,11 @@ const ProductDetail = ({ actual_product, getProductDetails }) => {
   let { name } = useParams();
   name = name.replace(/-/gm, ' ').toUpperCase();
 
+  const getProduct = useCallback(getProductDetails, []);
+
   useEffect(() => {
-    getProductDetails(name);
-  }, [name]);
+    getProduct(name);
+  }, [getProduct, name]);
 
   return (
     <Fragment>
@@ -38,9 +40,7 @@ const ProductDetail = ({ actual_product, getProductDetails }) => {
           <ProductName>{actual_product.name}</ProductName>
           <Price>
             <PriceValue>
-              {actual_product.on_sale
-                ? actual_product.actual_price
-                : actual_product.regular_price}
+              {actual_product.on_sale ? actual_product.actual_price : actual_product.regular_price}
             </PriceValue>
             <PriceInstallments>{actual_product.installments}</PriceInstallments>
           </Price>

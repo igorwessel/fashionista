@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 const Sidebar = ({ children, ui: { cartPanel, searchPanel } }) => {
   return (
-    <BGDark style={{ display: cartPanel || searchPanel ? 'flex' : '' }}>
+    <BGDark style={{ display: cartPanel || searchPanel ? 'flex' : 'none' }}>
       <Container>{children}</Container>
     </BGDark>
   );

@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from 'pages/Home';
 import ProductDetail from 'pages/ProductDetail';
-import Header from 'components/UI/Header';
 
 const Routes = () => (
   <BrowserRouter>

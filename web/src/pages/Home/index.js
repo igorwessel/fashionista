@@ -18,7 +18,7 @@ import Header from 'components/UI/Header';
 const Home = ({ getAllProducts, products }) => {
   useEffect(() => {
     getAllProducts();
-  });
+  }, [getAllProducts]);
 
   return (
     <Fragment>
@@ -29,22 +29,14 @@ const Home = ({ getAllProducts, products }) => {
           {products.map((product, index) => (
             <Product key={product.name + '_' + index}>
               <Link
-                to={`/produto/${product.name
-                  .toLowerCase()
-                  .replace(/\s+/gm, '-')}`}
+                to={`/produto/${product.name.toLowerCase().replace(/\s+/gm, '-')}`}
                 style={{ color: '#aaa' }}
               >
                 <ProductPhoto>
                   {product.discount_percentage && (
-                    <ProductDiscount>
-                      {product.discount_percentage}
-                    </ProductDiscount>
+                    <ProductDiscount>{product.discount_percentage}</ProductDiscount>
                   )}
-                  {product.image ? (
-                    <Photo src={product.image} />
-                  ) : (
-                    'Imagem indisponivel'
-                  )}
+                  {product.image ? <Photo src={product.image} /> : 'Imagem indisponivel'}
                 </ProductPhoto>
                 <ProductName>{product.name}</ProductName>
                 {product.actual_price !== product.regular_price && (

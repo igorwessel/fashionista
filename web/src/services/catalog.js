@@ -21,6 +21,4 @@ const getProductByName = async (productName) => {
     console.error(e);
   }
 };
-
-console.log(getProductByName('VESTIDO TRANSPASSE BOW'));
 export { getProducts, getProductByName };
