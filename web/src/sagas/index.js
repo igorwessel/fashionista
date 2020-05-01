@@ -1,17 +1,28 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
-import { getProducts } from 'services/catalog';
+import { all, call, put, fork, takeEvery } from 'redux-saga/effects';
+import {
+  receiveProducts,
+  receiveProduct,
+} from 'reducers/inventory/action-creators';
+import { PRODUCTS_GET_BY_NAME } from 'reducers/inventory/actions';
+import { getProducts, getProductByName } from 'services/catalog';
 
-function* fetchProducts(action) {
-  try {
-    const products = yield call(getProducts, action.payload.products);
-    yield put({ type: 'PRODUCTS_FETCH_SUCCEEDED', products });
-  } catch (err) {
-    yield put({ type: 'PRODUCTS_FETCH_FAILED', message: err });
-  }
+export function* getAllProducts() {
+  const products = yield call(getProducts);
+  yield put(receiveProducts(products));
 }
 
-function* saga() {
-  yield takeEvery('PRODUCTS_FETCH_REQUEST', fetchProducts);
+export function* getProductDetails(action) {
+  const product = yield call(getProductByName, action.payload.name);
+
+  yield put(receiveProduct(product));
 }
 
-export default saga;
+function* watchProductDetails() {
+  yield takeEvery(PRODUCTS_GET_BY_NAME, getProductDetails);
+}
+
+function* rootSaga() {
+  yield all([fork(getAllProducts), fork(watchProductDetails)]);
+}
+
+export default rootSaga;

@@ -1,6 +1,7 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getProducts } from 'services/catalog';
+import { getAllProducts } from 'reducers/inventory/action-creators';
 import {
   Container,
   Catalog,
@@ -14,17 +15,10 @@ import {
 } from './styled';
 import Header from 'components/UI/Header';
 
-const Home = () => {
-  const [products, setProducts] = useState([]);
-
+const Home = ({ getAllProducts, products }) => {
   useEffect(() => {
-    const fetchProducts = async () => {
-      let response = await getProducts();
-      setProducts(response.products);
-    };
-
-    fetchProducts();
-  }, []);
+    getAllProducts();
+  });
 
   return (
     <Fragment>
@@ -66,4 +60,12 @@ const Home = () => {
   );
 };
 
-export default Home;
+const mapStateToProps = (state) => ({
+  products: state.inventory.products,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getAllProducts: () => dispatch(getAllProducts()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

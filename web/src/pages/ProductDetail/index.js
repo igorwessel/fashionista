@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import Header from 'components/UI/Header';
 import {
   Product,
@@ -15,36 +15,49 @@ import {
   Button,
   ButtonWithoutBorder,
 } from './styled';
+import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { getProductDetails } from 'reducers/inventory/action-creators';
 
-const ProductDetail = () => {
+const ProductDetail = ({ actual_product, getProductDetails }) => {
+  let { name } = useParams();
+  name = name.replace(/-/gm, ' ').toUpperCase();
+
+  useEffect(() => {
+    getProductDetails(name);
+  }, [name]);
+
   return (
     <Fragment>
       <Header />
       <Product>
         <PhotoContainer>
-          <Photo
-            src="https://d3l7rqep7l31az.cloudfront.net/images/products/20002605_615_catalog_1.jpg?1460136912"
-            alt=""
-          />
+          <Photo src={actual_product.image} alt="" />
         </PhotoContainer>
         <Details>
-          <ProductName>VESTIDO TRANSPASSE BOW</ProductName>
+          <ProductName>{actual_product.name}</ProductName>
           <Price>
-            <PriceValue>R$ 199,90 </PriceValue>
-            <PriceInstallments>em até 3x R$66,63</PriceInstallments>
+            <PriceValue>
+              {actual_product.on_sale
+                ? actual_product.actual_price
+                : actual_product.regular_price}
+            </PriceValue>
+            <PriceInstallments>{actual_product.installments}</PriceInstallments>
           </Price>
           <Size>
             Escolha o tamanho
             <SizeList>
-              <SizeItem>
-                <ButtonWithoutBorder>P</ButtonWithoutBorder>
-              </SizeItem>
-              <SizeItem>
-                <ButtonWithoutBorder>M</ButtonWithoutBorder>
-              </SizeItem>
-              <SizeItem>
-                <ButtonWithoutBorder>G</ButtonWithoutBorder>
-              </SizeItem>
+              {actual_product.sizes
+                ? actual_product.sizes.map(({ size, available }) => {
+                    if (available) {
+                      return (
+                        <SizeItem key={size}>
+                          <ButtonWithoutBorder>{size}</ButtonWithoutBorder>
+                        </SizeItem>
+                      );
+                    }
+                  })
+                : ''}
             </SizeList>
           </Size>
           <Button>Adicionar à Sacola</Button>
@@ -54,4 +67,12 @@ const ProductDetail = () => {
   );
 };
 
-export default ProductDetail;
+const mapStateToProps = (state) => ({
+  actual_product: state.inventory.actual_product,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getProductDetails: (name) => dispatch(getProductDetails(name)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);
