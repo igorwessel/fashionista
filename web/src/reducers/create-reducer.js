@@ -6,7 +6,7 @@ const createReducer = (initialState, handleActions) => (
     throw new Error('initial state should not be undefined');
   }
 
-  if (typeof handleActions.hasOwnProperty === 'undefined') {
+  if (Object.prototype.toString.call(handleActions) !== '[object Object]') {
     throw new Error(
       'createReducer expects second arguments as an object representing reducer.'
     );

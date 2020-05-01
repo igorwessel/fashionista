@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import reducers from './reducers';
-
+import configureStore, { sagaMiddleware } from 'store';
+import saga from 'sagas';
 import 'styles/global.css';
 import App from 'App.jsx';
 
-const store = createStore(reducers);
+const store = configureStore();
+sagaMiddleware.run(saga);
 
 ReactDOM.render(
   <React.StrictMode>

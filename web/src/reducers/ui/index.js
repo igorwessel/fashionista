@@ -19,3 +19,4 @@ const ui = createReducer(initialState, {
 });
 
 export default ui;
+export { initialState };

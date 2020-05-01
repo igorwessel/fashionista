@@ -15,7 +15,7 @@ export const Catalog = styled.ul`
   flex-wrap: wrap;
   list-style: none;
 
-  @media ${device.mobileS} and (max-width: 825px) {
+  @media ${device.mobileS} and (max-width: 925px) {
     align-content: center;
     justify-content: center;
   }
