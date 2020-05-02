@@ -18,7 +18,7 @@ export const getProductDetails = (name) => ({
 export const filterByName = (name) => ({
   type: PRODUCTS_FILTER_BY_NAME,
   payload: {
-    name,
+    name: name.toLowerCase(),
   },
 });
 
