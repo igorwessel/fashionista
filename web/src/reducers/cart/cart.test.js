@@ -22,6 +22,7 @@ describe('Cart Flow ', () => {
         image: 'blabla.png',
         quantity: 1,
         price: 129.99,
+        installments: '3x R$ 66,63',
         size: ['5807_343_0_PP', '5807_343_0_GG'],
       },
     };
@@ -32,7 +33,8 @@ describe('Cart Flow ', () => {
         image: 'blabla.png',
         quantity: 1,
         price: 129.99,
-        size: ['5807_343_0_PP', '5807_343_0_GG'],
+        installments: '3x R$ 66,63',
+        size: ['5807_343_0_PP', '5807_343_0_GG  '],
       },
     ];
 

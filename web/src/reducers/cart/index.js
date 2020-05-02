@@ -18,11 +18,11 @@ const cart = createReducer(initialState, {
     ),
   ],
   [DECREASE_QUANTITY]: (state, action) => [
-    ...state.map((product) => {
+    ...state.map((product) =>
       product.id === action.payload.id
-        ? { ...product, quantity: product.quantity + 1 }
-        : product;
-    }),
+        ? { ...product, quantity: product.quantity - 1 }
+        : product
+    ),
   ],
 });
 

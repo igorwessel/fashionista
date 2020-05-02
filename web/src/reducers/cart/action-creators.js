@@ -5,10 +5,24 @@ import {
   REMOVE_PRODUCT,
 } from './actions';
 
-export const addProduct = (product) => ({
+export const addProduct = ({
+  id,
+  name,
+  image,
+  quantity,
+  price,
+  sizes,
+  installments,
+}) => ({
   type: ADD_PRODUCT,
   payload: {
-    ...product,
+    id,
+    name,
+    image,
+    quantity,
+    price,
+    sizes,
+    installments,
   },
 });
 

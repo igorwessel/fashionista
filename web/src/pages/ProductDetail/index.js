@@ -18,15 +18,30 @@ import {
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getProductDetails } from 'reducers/inventory/action-creators';
+import { addProduct } from 'reducers/cart/action-creators';
 
-const ProductDetail = ({ actual_product, getProductDetails }) => {
+const ProductDetail = ({ actual_product, getProductDetails, addProduct }) => {
   let { name } = useParams();
 
   const getProduct = useCallback(getProductDetails, []);
 
+  const handleProduct = useCallback(
+    () =>
+      addProduct({
+        id: actual_product.sizes[0].sku.substr(0, 4),
+        name: actual_product.name,
+        image: actual_product.image,
+        quantity: 1,
+        price: actual_product.actual_price,
+        installments: actual_product.installments,
+        sizes: actual_product.sizes.filter(({ available }) => available),
+      }),
+    [addProduct, actual_product]
+  );
+
   useEffect(() => {
     getProduct(name);
-  }, [getProduct, name]);
+  }, [getProduct, name, handleProduct]);
 
   return (
     <Fragment>
@@ -43,7 +58,9 @@ const ProductDetail = ({ actual_product, getProductDetails }) => {
           <ProductName>{actual_product.name}</ProductName>
           <Price>
             <PriceValue>
-              {actual_product.on_sale ? actual_product.actual_price : actual_product.regular_price}
+              {actual_product.on_sale
+                ? actual_product.actual_price
+                : actual_product.regular_price}
             </PriceValue>
             <PriceInstallments>{actual_product.installments}</PriceInstallments>
           </Price>
@@ -63,7 +80,7 @@ const ProductDetail = ({ actual_product, getProductDetails }) => {
                 : ''}
             </SizeList>
           </Size>
-          <Button>Adicionar à Sacola</Button>
+          <Button onClick={handleProduct}>Adicionar à Sacola</Button>
         </Details>
       </Product>
     </Fragment>
@@ -76,6 +93,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getProductDetails: (name) => dispatch(getProductDetails(name)),
+  addProduct: (product) => dispatch(addProduct(product)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);

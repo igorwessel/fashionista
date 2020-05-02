@@ -2,6 +2,11 @@ import React from 'react';
 import { MdArrowBack } from 'react-icons/md';
 import { connect } from 'react-redux';
 import { closeCartPanel } from 'reducers/ui/action-creators';
+import {
+  removeProduct,
+  increaseQuantity,
+  decreaseQuantity,
+} from 'reducers/cart/action-creators';
 
 import Sidebar from 'components/UI/Sidebar';
 import {
@@ -25,7 +30,13 @@ import {
   Text,
 } from './styled';
 
-const CartPanel = ({ closeCart }) => {
+const CartPanel = ({
+  closeCart,
+  cart,
+  removeProduct,
+  increaseQuantity,
+  decreaseQuantity,
+}) => {
   return (
     <Sidebar>
       <CartContainer>
@@ -35,31 +46,41 @@ const CartPanel = ({ closeCart }) => {
             onClick={closeCart}
             style={{ cursor: 'pointer' }}
           />
-          <CartTitle>Sacola (1)</CartTitle>
+          <CartTitle>Sacola ({cart.length})</CartTitle>
         </CartHeader>
         <ProductContainer>
           <ProductList>
-            <ProductItem>
-              <ContainerColumn>
-                <ProductImage>
-                  <Photo src="https://d3l7rqep7l31az.cloudfront.net/images/products/20001786_594_catalog_1.jpg?1449159646" />
-                </ProductImage>
-                <RemoveText>Remover Item</RemoveText>
-              </ContainerColumn>
-              <ContainerColumn>
-                <ProductName>CALÇA COMFORT TASSEL</ProductName>
-                <TextMargin10>Tam.: 40</TextMargin10>
-                <Container>
-                  <Button>-</Button>
-                  <Text>1</Text>
-                  <Button>+</Button>
-                </Container>
-              </ContainerColumn>
-              <ProductPrice>
-                <Price>R$ 139,90</Price>
-                <Installments>2x R$ 42,45</Installments>
-              </ProductPrice>
-            </ProductItem>
+            {cart.map((product) => (
+              <ProductItem>
+                <ContainerColumn>
+                  <ProductImage>
+                    <Photo src={product.image} />
+                  </ProductImage>
+                  <RemoveText onClick={() => removeProduct(product.id)}>
+                    Remover Item
+                  </RemoveText>
+                </ContainerColumn>
+                <ContainerColumn>
+                  <ProductName>{product.name}</ProductName>
+                  <TextMargin10>
+                    Tam.: {product.sizes.map(({ size }) => size).join(', ')}
+                  </TextMargin10>
+                  <Container>
+                    <Button onClick={() => decreaseQuantity(product.id)}>
+                      -
+                    </Button>
+                    <Text>{product.quantity}</Text>
+                    <Button onClick={() => increaseQuantity(product.id)}>
+                      +
+                    </Button>
+                  </Container>
+                </ContainerColumn>
+                <ProductPrice>
+                  <Price>{product.price}</Price>
+                  <Installments>{product.installments}</Installments>
+                </ProductPrice>
+              </ProductItem>
+            ))}
           </ProductList>
         </ProductContainer>
       </CartContainer>
@@ -67,8 +88,15 @@ const CartPanel = ({ closeCart }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  closeCart: () => dispatch(closeCartPanel()),
+const mapStateToProps = (state) => ({
+  cart: state.cart,
 });
 
-export default connect(null, mapDispatchToProps)(CartPanel);
+const mapDispatchToProps = (dispatch) => ({
+  closeCart: () => dispatch(closeCartPanel()),
+  removeProduct: (id) => dispatch(removeProduct(id)),
+  increaseQuantity: (id) => dispatch(increaseQuantity(id)),
+  decreaseQuantity: (id) => dispatch(decreaseQuantity(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartPanel);
