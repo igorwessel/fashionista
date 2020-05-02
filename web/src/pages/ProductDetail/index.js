@@ -21,7 +21,6 @@ import { getProductDetails } from 'reducers/inventory/action-creators';
 
 const ProductDetail = ({ actual_product, getProductDetails }) => {
   let { name } = useParams();
-  name = name.replace(/-/gm, ' ').toUpperCase();
 
   const getProduct = useCallback(getProductDetails, []);
 
@@ -34,7 +33,11 @@ const ProductDetail = ({ actual_product, getProductDetails }) => {
       <Header />
       <Product>
         <PhotoContainer>
-          <Photo src={actual_product.image} alt="" />
+          {actual_product.image ? (
+            <Photo src={actual_product.image} alt="" />
+          ) : (
+            'Imagem indisponivel'
+          )}
         </PhotoContainer>
         <Details>
           <ProductName>{actual_product.name}</ProductName>

@@ -28,10 +28,7 @@ const Home = ({ getAllProducts, products }) => {
         <Catalog>
           {products.map((product, index) => (
             <Product key={product.name + '_' + index}>
-              <Link
-                to={`/produto/${product.name.toLowerCase().replace(/\s+/gm, '-')}`}
-                style={{ color: '#aaa' }}
-              >
+              <Link to={`/produto/${product.name.split('+')}`} style={{ color: '#aaa' }}>
                 <ProductPhoto>
                   {product.discount_percentage && (
                     <ProductDiscount>{product.discount_percentage}</ProductDiscount>

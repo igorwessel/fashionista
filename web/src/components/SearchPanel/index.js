@@ -9,16 +9,28 @@ import {
   SearchDetails,
   SearchTitle,
   ProductContainer,
+  ProductList,
+  ProductItem,
+  ProductImage,
+  ProductName,
+  ProductPrice,
+  Photo,
+  Price,
+  Installments,
 } from './styled';
 import Sidebar from 'components/UI/Sidebar';
 
 import { closeSearchPanel } from 'reducers/ui/action-creators';
-import ProductFilteredList from 'components/ProductFilteredList';
 import { filterByName } from 'reducers/inventory/action-creators';
 
 const SearchPanel = ({ closeSearch, filtered, filterByName }) => {
   const [query, setQuery] = useState();
-  const filter = useMemo(() => filterByName(query), [query, filterByName]);
+  useMemo(() => {
+    if (query === '' || query === undefined) {
+      return;
+    }
+    filterByName(query);
+  }, [query, filterByName]);
 
   return (
     <Sidebar>
@@ -38,7 +50,20 @@ const SearchPanel = ({ closeSearch, filtered, filterByName }) => {
         </SearchContainer>
         <ProductContainer>
           {filtered.length} items
-          <ProductFilteredList />
+          <ProductList>
+            {filtered.map((product, index) => (
+              <ProductItem key={product.style + index}>
+                <ProductImage>
+                  {product.image ? <Photo src={product.image} /> : 'Imagem indisponivel'}
+                </ProductImage>
+                <ProductName>{product.name}</ProductName>
+                <ProductPrice>
+                  <Price>{product.actual_price}</Price>
+                  <Installments>{product.installments}</Installments>
+                </ProductPrice>
+              </ProductItem>
+            ))}
+          </ProductList>
         </ProductContainer>
       </PanelContainer>
     </Sidebar>

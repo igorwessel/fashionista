@@ -24,7 +24,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 420px;
-  height: 100vh;
   @media (max-width: 412px) {
     width: 100%;
   }

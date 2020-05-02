@@ -15,7 +15,16 @@ export const Product = styled.div`
 
 export const ProductName = styled.h3``;
 
-export const PhotoContainer = styled.figure``;
+export const PhotoContainer = styled.figure`
+  display: flex;
+  justify-content: center;
+  color: #aaa;
+  font-weight: 600;
+  align-items: center;
+  min-width: 470px;
+  min-height: 598px;
+  background-color: white;
+`;
 
 export const Photo = styled.img`
   width: 100%;
@@ -60,6 +69,7 @@ export const SizeItem = styled.li`
 export const Button = styled.button`
   background-color: black;
   color: #fff;
+  width: 250px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
   margin: 10px 0;
   border-radius: 5px;
@@ -68,6 +78,7 @@ export const Button = styled.button`
 `;
 
 export const ButtonWithoutBorder = styled(Button)`
+  width: 100%;
   background-color: transparent;
   color: black;
   box-shadow: none;
